@@ -1,0 +1,59 @@
+﻿body { 
+    padding-top: 70px; 
+}
+
+.panel-heading.active{
+    background-color: #337ab7;
+    color: #fff;
+}
+
+.black-back {
+    background-color: #000;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: #337ab7;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #ccc;
+}
+
+#datepicker,
+#searchline {
+    padding-bottom: 15px;
+}
+
+.navbar-brand {
+    color: #337ab7 !important;
+}
+
+.right-align{
+    float:right;
+    margin: 0;
+}
+
+#cal-icon {
+    float: right;
+    padding-top: 5px;
+    padding-left: 2px;
+    /**padding-top: 5px;*/
+}
+
+.nudge-down {
+    /**padding-top: 5px;*/
+}
+
+.defendant-line{
+    font-weight: bold;
+}
+
+img.centered{
+    display: block;
+    margin: auto auto;
+}

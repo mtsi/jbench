@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Judicial Workbench</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <link href="css/bootstrap-datepicker.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            today = mm + '/' + dd + '/' + yyyy;
+            $('#datepicker').datepicker({ autoclose: true, startDate: today });
+            $('#theDate').val(today);
+            var $active = $('#accordion .panel-collapse.in').prev().addClass('active');
+            $active.find('a').append('<span class="glyphicon glyphicon-minus pull-right"></span>');
+            $('#accordion .panel-heading').not($active).find('a').prepend('<span class="glyphicon glyphicon-plus pull-right"></span>');
+            $('#accordion').on('show.bs.collapse', function (e) {
+                $('#accordion .panel-heading.active').removeClass('active').find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus');
+                $(e.target).prev().addClass('active').find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus');
+            });
+            $('#accordion').on('hide.bs.collapse', function (e) {
+                $(e.target).prev().removeClass('active').find('.glyphicon').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+            });
+
+            $('#firstWarrant').click(function () {
+                $('#showLogo').hide();
+                $('#typeOfCase').html('Warrant - Moritz, Jay');
+                $('#warrant1').show();
+                $('#warrant2').hide();
+            });
+
+            $('#secondWarrant').click(function () {
+                $('#showLogo').hide();
+                $('#typeOfCase').html('Warrant - Newman, Erika');
+                $('#warrant2').show();
+                $('#warrant1').hide();
+            });
+
+            $('.navbar-nav li').click(function (e) {
+                $('.navbar-nav li.active').removeClass('active');
+                var $this = $(this);
+                if (!$this.hasClass('active')) {
+                    $this.addClass('active');
+                }
+                e.preventDefault();
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid black-back">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Judicial Workbench</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Calendar</a></li>
+                <li><a href="#">Min/Mandatory Chart</a></li>
+                <li><a href="#">Trial Guide</a></li>
+                <li><a href="#">Calendar Check-in</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="input-append date" id="datepicker">
+                    <span class="text-primary">Calendar Date:</span>&nbsp;<input type="text" value="07-06-2015" id="theDate"><span class="add-on glyphicon glyphicon-calendar" id="cal-icon"></span>
+                </div>
+            </div>
+            <div class="col-sm-10" id="searchline"><p class="nudge-down"><a class="btn btn-primary" href="#">GO</a></p></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div id="accordion" class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Attorney Cases</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p>Attorney cases listed here</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Juvenile</a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p>Juvenile cases listed here</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Exotic Language</a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p>Exotic language cases listed here</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Warrants (2)</a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p><a href="#" id="firstWarrant">Moritz, Jay</a></p>
+                                <p><a href="#" id="secondWarrant">Newman, Erika</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="typeOfCase">
+                        Judicial Workbench
+                    </div>
+                    <div class="panel-body">
+                        <div id="showLogo">
+                            <img src="images/lasc-logo.gif" class="img-responsive centered" />
+                        </div>
+                        <div id="warrant2" style="display:none;">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Notice</a></li>
+                                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Bail</a></li>
+                                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Violations</a></li>
+                                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Case Status</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="home">
+                                    <p>CCP 170.6 - Marty Rothschild<br />Warrant<br />Mandatory</p>
+                                    <p class="defendant-line"><span class="glyphicon glyphicon-info-sign"></span> Newman, Erika</p>
+                                    <table border="1" width="100%">
+                                        <tr>
+                                            <td>DLN</td><td>COMM<br />DL</td><td>DOB</td><td>Sex</td><td>Judicial Notes</td><td>Case Notes</td>
+                                        </tr>
+                                        <tr>
+                                            <td>C9783124</td><td>N</td><td>01/19/1968</td><td>Female</td><td>Defendant request restricted license for work reasons</td><td>Warrant on 13WVM9917</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="profile">
+                                    <table border="1" width="100%">
+                                        <tr>
+                                            <td>Bail Type</td>
+                                            <td>Posted Date</td>
+                                            <td>Amount</td>
+                                            <td>Status</td>
+                                            <td>Authorize Ind</td>
+                                            <td>Balance Amount</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cash Bail</td>
+                                            <td>04/21/2014</td>
+                                            <td>$500.00</td>
+                                            <td>Acive</td>
+                                            <td>Y</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="messages">
+                                    <table border="1" width="100%">
+                                        <tr>
+                                            <td>Code</td>
+                                            <td>Date</td>
+                                            <td>CNT</td>
+                                            <td>O/L</td>
+                                            <td>Desc</td>
+                                            <td>Priors</td>
+                                            <td>POC</td>
+                                            <td>MM</td>
+                                            <td>Base<br />Bail</td>
+                                            <td>Plea</td>
+                                            <td>Plea<br />Date</td>
+                                            <td>Count<br />Dispo</td>
+                                            <td>Dispo<br />Date</td>
+                                        </tr>
+                                        <tr>
+                                            <td>22348(b) VC</td>
+                                            <td>04/20/2014</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>Speeding greater than 100 MPH</td>
+                                            <td>0</td>
+                                            <td></td>
+                                            <td><span class="glyphicon glyphicon-usd"></span></td>
+                                            <td>$235.00</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="settings">
+                                    <p>Case Level Priors: 0 | Approximate Speed: 100 | Safe Speed: 55 | Speed Limit: 55</p>
+                                    <table border="1" width="100%">
+                                        <tr>
+                                            <td>Originating Court</td>
+                                            <td>Originating Agency</td>
+                                            <td>Officer</td>
+                                            <td>Appearance Date</td>
+                                            <td>Ext Date</td>
+                                            <td>Trial Date(s)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Central</td>
+                                            <td>Los Angeles Sherrifs Department</td>
+                                            <td>321 Waters</td>
+                                            <td>05/15/2014</td>
+                                            <td></td>
+                                            <td><span class="glyphicon glyphicon-calendar"></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="warrant1" style="display:none;">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#home1" aria-controls="home" role="tab" data-toggle="tab">Notice</a></li>
+                                <li role="presentation"><a href="#profile1" aria-controls="profile" role="tab" data-toggle="tab">Bail</a></li>
+                                <li role="presentation"><a href="#messages1" aria-controls="messages" role="tab" data-toggle="tab">Violations</a></li>
+                                <li role="presentation"><a href="#settings1" aria-controls="settings" role="tab" data-toggle="tab">Case Status</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="home1">
+                                    <p>CPC 597 - Marty Rothschild<br />Warrant<br />Mandatory</p>
+                                    <p class="defendant-line"><span class="glyphicon glyphicon-info-sign"></span> Moritz, Jay</p>
+                                    <table border="1" width="100%">
+                                        <tr>
+                                            <td>DLN</td>
+                                            <td>COMM<br />DL</td>
+                                            <td>DOB</td>
+                                            <td>Sex</td>
+                                            <td>Judicial Notes</td>
+                                            <td>Case Notes</td>
+                                        </tr>
+                                        <tr>
+                                            <td>N5932145</td>
+                                            <td>N</td>
+                                            <td>03/16/1967</td>
+                                            <td>Male</td>
+                                            <td>Defendant requested special permission to get a new pet</td>
+                                            <td>Warrant on 14WVM1232</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="profile1">
+                                    <table border="1" width="100%">
+                                        <tr>
+                                            <td>Bail Type</td>
+                                            <td>Posted Date</td>
+                                            <td>Amount</td>
+                                            <td>Status</td>
+                                            <td>Authorize Ind</td>
+                                            <td>Balance Amount</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cash Bail</td>
+                                            <td>05/24/2015</td>
+                                            <td>$50,000.00</td>
+                                            <td>Acive</td>
+                                            <td>Y</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="messages1">
+                                    <table border="1" width="100%">
+                                        <tr>
+                                            <td>Code</td>
+                                            <td>Date</td>
+                                            <td>CNT</td>
+                                            <td>O/L</td>
+                                            <td>Desc</td>
+                                            <td>Priors</td>
+                                            <td>POC</td>
+                                            <td>MM</td>
+                                            <td>Base<br />Bail</td>
+                                            <td>Plea</td>
+                                            <td>Plea<br />Date</td>
+                                            <td>Count<br />Dispo</td>
+                                            <td>Dispo<br />Date</td>
+                                        </tr>
+                                        <tr>
+                                            <td>597(b) PC</td>
+                                            <td>05/24/2015</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>Abuse of animals</td>
+                                            <td>0</td>
+                                            <td></td>
+                                            <td align="center"><span class="glyphicon glyphicon-usd"></span></td>
+                                            <td>$10,000.00</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="settings1">
+                                    <p>Case Level Priors: 3 | Witnesses: Y | Booked: Men's Central Jail</p>
+                                    <table border="1" width="100%">
+                                        <tr>
+                                            <td>Originating Court</td>
+                                            <td>Originating Agency</td>
+                                            <td>Officer</td>
+                                            <td>Appearance Date</td>
+                                            <td>Ext Date</td>
+                                            <td>Trial Date(s)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Central</td>
+                                            <td>Los Angeles Sherrifs Department</td>
+                                            <td>321 Waters</td>
+                                            <td>06/24/2015</td>
+                                            <td></td>
+                                            <td><span class="glyphicon glyphicon-calendar"></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
